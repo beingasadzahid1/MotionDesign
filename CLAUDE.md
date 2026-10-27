@@ -12,6 +12,8 @@ Motion design workspace. Launch videos, motion pieces and share copy for project
   - `brag/docs/`: launch site source.
   - `brag/PRODUCT.md`: brand brief for brag itself (voice, audience, anti-references).
   - `brag/scripts/`: `check-brag-slim.mjs`, `check-docs.mjs` consistency checks.
+- `chatterbox/`: vendored snapshot of [resemble-ai/chatterbox](https://github.com/resemble-ai/chatterbox) at `5de7a54`. Open-source TTS (Turbo, Nano, original, Multilingual V3). Install with `pip install -e chatterbox` on Python 3.11.
+- `.claude/skills/chatterbox-vo/`: project skill that renders VO scripts to WAV with Chatterbox. Renderer is `scripts/vo.py`.
 
 ## Working in brag/
 
@@ -19,3 +21,10 @@ Motion design workspace. Launch videos, motion pieces and share copy for project
 - Its `.claude/`, `.claude-plugin/`, `.codex-plugin/` and `.opencode/` configs only load from a repo root. Inside `brag/` they're inert reference.
 - Skill links under `brag/.agents`, `brag/.claude` and `brag/.opencode` are symlinks into `brag/skills/`. Keep them as links.
 - Run the checks from inside `brag/`: `node scripts/check-docs.mjs` and `node scripts/check-brag-slim.mjs`.
+
+## Working in chatterbox/
+
+- Same vendoring rules as `brag/`: plain copy, no upstream history, re-copy to update.
+- Pinned to `torch==2.6.0`. Keep it in its own virtualenv, not the system Python.
+- Model weights come from Hugging Face on first use and cache under `~/.cache/huggingface`. Never commit them.
+- Output carries Resemble's Perth watermark.
